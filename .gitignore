@@ -1,0 +1,13 @@
+.DS_Store
+
+# Local editor / runtime artifacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# Generated outputs
+02_tidy/
+04_results/
+
+# Optional local app deployment metadata
+rsconnect/

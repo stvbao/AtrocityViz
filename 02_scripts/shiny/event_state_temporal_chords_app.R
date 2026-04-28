@@ -1,5 +1,5 @@
-# event_state_conflict_chords_app.R
-# Circular monthly event-state app with conflict chords
+# event_state_temporal_chords_app.R
+# Circular monthly event-state app with temporal radial layout and conflict chords
 library(shiny)
 library(dplyr)
 library(ggplot2)

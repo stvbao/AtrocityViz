@@ -18,5 +18,14 @@ if (dir.exists(site_dir)) {
   unlink(site_dir, recursive = TRUE, force = TRUE)
 }
 
-shinylive::export(app_dir, site_dir)
+core_wasm_packages <- shinylive:::resolve_dependencies(
+  c("shiny", "bslib", "renv"),
+  local = FALSE
+)
+
+Sys.setenv(
+  SHINYLIVE_DOWNLOAD_WASM_CORE_PACKAGES = paste(core_wasm_packages, collapse = ",")
+)
+
+shinylive::export(app_dir, site_dir, wasm_packages = TRUE)
 message("Shinylive site exported to ", normalizePath(site_dir, mustWork = FALSE))

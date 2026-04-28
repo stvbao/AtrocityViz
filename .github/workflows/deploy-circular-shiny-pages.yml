@@ -53,13 +53,13 @@ jobs:
 
       - name: Export Shinylive site
         run: |
-          shinylive::export("02_scripts/deploy/shiny_circular_conflict", "site")
+          source("02_scripts/deploy/export_circular_shinylive.R", local = new.env())
         shell: Rscript {0}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment

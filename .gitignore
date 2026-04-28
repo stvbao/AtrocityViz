@@ -1,4 +1,6 @@
 .DS_Store
+.gitignore
+.github/
 
 # Local editor / runtime artifacts
 .Rhistory

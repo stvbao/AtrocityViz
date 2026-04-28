@@ -8,6 +8,7 @@
 # Generated outputs
 02_tidy/
 04_results/
+_site/
 
 # Optional local app deployment metadata
 rsconnect/

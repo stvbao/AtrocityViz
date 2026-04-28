@@ -1,0 +1,59 @@
+name: Deploy Circular Shiny App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-circular-shiny-pages.yml"
+      - "02_scripts/deploy/shiny_circular_conflict/**"
+      - "02_scripts/deploy/export_circular_shinylive.R"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Install Shinylive build dependencies
+        run: |
+          install.packages(
+            c("shinylive", "shiny", "dplyr", "ggplot2"),
+            repos = "https://cloud.r-project.org"
+          )
+        shell: Rscript {0}
+
+      - name: Export Shinylive site
+        run: |
+          source("02_scripts/deploy/export_circular_shinylive.R", local = new.env())
+        shell: Rscript {0}
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

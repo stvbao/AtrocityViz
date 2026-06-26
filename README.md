@@ -2,7 +2,11 @@
 
 Standalone visualization scripts and Shiny apps extracted from the main AtrocityNet project.
 
-Interactive Visualization: https://stevenbao-atrocitynet.share.connect.posit.cloud/
+For online interactive visualization: https://stevenbao-atrocitynet.share.connect.posit.cloud/
+
+![GED 2025 Network screenshot](assets/ged-2025-network-screenshot.jpeg)
+
+To run locally, see below:
 
 ## Run locally
 
